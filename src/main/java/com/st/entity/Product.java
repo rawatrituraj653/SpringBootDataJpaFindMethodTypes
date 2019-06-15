@@ -21,5 +21,5 @@ public class Product {
 		@NonNull
 		private String prodName;
 		@NonNull
-		private String prodCost;
+		private Double prodCost;
 }

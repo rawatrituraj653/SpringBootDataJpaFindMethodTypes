@@ -1,33 +1,30 @@
 package com.st.runner;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.st.entity.Product;
 import com.st.repo.ProductRepository;
 
 @Component
-public class ConsoleRunner implements ApplicationRunner{
+public class ConsoleRunner implements CommandLineRunner{
 
 	@Autowired
 	private ProductRepository repo;
 	@Override
-	public void run(ApplicationArguments args) throws Exception {
+	public void run(String... args) throws Exception {
 		
 		System.out.println("Date is: "+LocalDate.now());
-	Optional<Product> pobj=repo.findById(103);
-	if(pobj.isPresent()) {
-	Product	product=pobj.get();
-	System.out.println(product);
-	}else {
-		System.out.println("Record is not Found Sorry");
-	}
-
+		/*
+		 * Optional<Product> pobj=repo.findById(103); if(pobj.isPresent()) { Product
+		 * product=pobj.get(); System.out.println(product); }else {
+		 * System.out.println("Record is not Found Sorry"); }
+		 * //repo.findByProdCostEquals(12.3).forEach(System.out::println);
+		 */	
+		 //repo.findByProdCostBetween(11.3,15.3).forEach(System.out::println);
+		repo.findByProdCostOrderByProdNameDesc(11.3).forEach(s->System.out.println(s));;
 	}
 
 	
